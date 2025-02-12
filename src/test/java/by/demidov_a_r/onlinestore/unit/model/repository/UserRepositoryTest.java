@@ -113,20 +113,20 @@ class UserRepositoryTest {
 
     @Test
     void findByFirstnameLike() {
-        Assertions.assertNotNull(userRepository.findByFirstnameLike("Р").orElse(null));
-        Assertions.assertNull(userRepository.findByFirstnameLike("D").orElse(null));
+        Assertions.assertEquals(1, userRepository.findByFirstnameLike("Р").size());
+        Assertions.assertTrue(userRepository.findByFirstnameLike("D").isEmpty());
     }
 
     @Test
     void findByLastnameLike() {
-        Assertions.assertNotNull(userRepository.findByLastnameLike("Дем").orElse(null));
-        Assertions.assertNull(userRepository.findByLastnameLike("Деб").orElse(null));
+        Assertions.assertEquals(1, userRepository.findByLastnameLike("Дем").size());
+        Assertions.assertTrue(userRepository.findByLastnameLike("Деб").isEmpty());
     }
 
     @Test
     void findByPatronymicLike() {
-        Assertions.assertNotNull(userRepository.findByPatronymicLike("рус").orElse(null));
-        Assertions.assertNull(userRepository.findByPatronymicLike("Деб").orElse(null));
+        Assertions.assertEquals(1, userRepository.findByPatronymicLike("рус").size());
+        Assertions.assertTrue(userRepository.findByPatronymicLike("Деб").isEmpty());
     }
 
     @Test

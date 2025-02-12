@@ -10,8 +10,8 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(exclude = {"cart", "order"})
-@ToString(exclude = {"cart", "order"})
+@EqualsAndHashCode(exclude = {"cart", "orders"})
+@ToString(exclude = {"cart", "orders"})
 @Entity
 @Table(name = "users", schema = "public")
 public class User {
@@ -31,7 +31,7 @@ public class User {
     private Cart cart;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Order> order;
+    private List<Order> orders;
 
     public void setCart(Cart cart){
         this.cart = cart;
