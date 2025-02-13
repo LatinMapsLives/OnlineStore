@@ -30,7 +30,7 @@ public class RegistrationController {
                                BindingResult bindingResult,
                                @RequestParam String confirmPassword) {
 
-        if (confirmPassword.equals(userCreateEditDTO.getPassword())) {
+        if (!confirmPassword.equals(userCreateEditDTO.getPassword())) {
             bindingResult.addError(new ObjectError("user", "Пароли не совпадают!"));
         }
         if (bindingResult.hasErrors()) {

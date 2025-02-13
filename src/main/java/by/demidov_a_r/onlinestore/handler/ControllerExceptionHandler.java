@@ -1,14 +1,13 @@
-package by.demidov_a_r.onlinestore.controller;
+package by.demidov_a_r.onlinestore.handler;
 
 
-import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 
 @Log4j2
-@ControllerAdvice
+@ControllerAdvice(basePackages = "by.demidov_a_r.onlinestore.controller")
 public class ControllerExceptionHandler {
 
 

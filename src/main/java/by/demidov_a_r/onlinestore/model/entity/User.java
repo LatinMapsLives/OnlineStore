@@ -3,6 +3,7 @@ package by.demidov_a_r.onlinestore.model.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.context.annotation.Lazy;
 
 import java.util.List;
 
@@ -22,12 +23,13 @@ public class User {
 
     private String username;
     private String password;
+    private String image;
     @Embedded
     private PersonalInfo personalInfo;
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private Cart cart;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)

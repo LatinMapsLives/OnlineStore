@@ -7,6 +7,7 @@ import by.demidov_a_r.onlinestore.model.entity.Role;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Value;
+import org.springframework.web.multipart.MultipartFile;
 
 @Value
 public class UserCreateEditDTO {
@@ -18,5 +19,5 @@ public class UserCreateEditDTO {
     String password;
     PersonalInfo personalInfo;
     Role role;
-    Cart cart;
+    MultipartFile image;
 }

@@ -1,7 +1,7 @@
 spring:
   datasource:
     username: postgres
-    password: Sixkzf2023
+    password: postgres
     url: jdbc:postgresql://localhost:5432/postgres
     driver-class-name: org.postgresql.Driver
   jpa:
@@ -9,3 +9,6 @@ spring:
       hibernate:
         show_sql: true
         format_sql: true
+app:
+  image:
+    path: C:\Java_Projects\OnlineStore\images
