@@ -18,6 +18,7 @@ public interface UserRepository extends JpaRepository<User, Long>, FilterUserRep
     @Query("select u from User u where u.personalInfo.email = :email and u.password = :password")
     Optional<User> findByEmailAndPassword(String email, String password);
 
+
     @Query("select u from User u where u.personalInfo.firstName ilike %:firstname%")
     List<User> findByFirstnameLike(String firstname);
     @Query("select u from User u where u.personalInfo.lastName ilike %:lastname%")

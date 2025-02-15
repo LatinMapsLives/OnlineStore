@@ -15,4 +15,15 @@ public class CategoryReadMapper implements Mapper<Category, CategoryReadDTO> {
         }
         return new CategoryReadDTO(object.getId(), mapTo(object.getParentCategory()), object.getName());
     }
+
+    public Category reverseMap(CategoryReadDTO object) {
+        if (object == null){
+            return null;
+        }
+        return Category.builder()
+                .id(object.getId())
+                .name(object.getName())
+                .parentCategory(reverseMap(object.getParentCategory()))
+                .build();
+    }
 }

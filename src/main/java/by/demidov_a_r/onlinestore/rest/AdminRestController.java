@@ -10,8 +10,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Component;
-import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -19,14 +17,14 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/v1/users")
+@RequestMapping("/users")
 @RequiredArgsConstructor
-public class UserRestController {
+public class AdminRestController {
 
     private final UserService userService;
 
     @GetMapping
-    public PageResponse<UserReadDTO> onPageLoad(UserFilter filter, Pageable pageable) {
+    public PageResponse<UserReadDTO> findAllUsers(UserFilter filter, Pageable pageable) {
         Page<UserReadDTO> page = userService.findAll(filter, pageable);
         return PageResponse.of(page);
     }
@@ -41,12 +39,13 @@ public class UserRestController {
 
 
     @PutMapping("/{id}")
-    public Optional<UserReadDTO> update(@PathVariable("id") Long id, @Validated @RequestBody UserCreateEditDTO userCreateEditDTO) {
-        return userService.update(id, userCreateEditDTO);
+    public UserReadDTO updateUser(@PathVariable("id") Long id, @Validated @RequestBody UserCreateEditDTO userCreateEditDTO) {
+        return userService.update(id, userCreateEditDTO).orElseThrow(() ->
+                new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR));
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id) {
+    public void deleteUser(@PathVariable Long id) {
         userService.delete(id);
     }
 }

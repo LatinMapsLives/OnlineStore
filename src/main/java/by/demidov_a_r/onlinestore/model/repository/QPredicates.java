@@ -1,7 +1,6 @@
 package by.demidov_a_r.onlinestore.model.repository;
 
 import com.querydsl.core.types.ExpressionUtils;
-import com.querydsl.core.types.Operation;
 import com.querydsl.core.types.Predicate;
 import com.querydsl.core.types.dsl.Expressions;
 import lombok.AccessLevel;
