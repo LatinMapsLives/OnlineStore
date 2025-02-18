@@ -23,6 +23,7 @@
                     <p class="card-text" th:text="'Отчество: ' + *{personalInfo?.patronymic}">Patronymic</p>
                     <p class="card-text" th:text="'Отчество: ' + *{personalInfo?.phone}">Phone</p>
                     <p class="card-text" th:text="'Роль: ' + *{role.displayName}">Role</p>
+                    <img width="40" th:if="*{image}" th:src="@{/api/v1/users/{userId}/avatar(userId=*{id})}" alt="User image">
                     <a href="#" class="btn btn-warning mt-2">Редактировать профиль</a>
                 </div>
             </div>

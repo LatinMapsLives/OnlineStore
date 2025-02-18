@@ -9,6 +9,6 @@ public class CartReadMapper implements Mapper<Cart, CartReadDTO> {
 
     @Override
     public CartReadDTO mapTo(Cart object) {
-        return new CartReadDTO(object.getUser_id(), object.getCartItems());
+        return new CartReadDTO(object.getId(), object.getCartItems());
     }
 }

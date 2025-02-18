@@ -17,19 +17,18 @@ import java.math.BigDecimal;
 @Table(name = "order_items", schema = "public")
 public class OrderItem {
 
-    @EmbeddedId
-    private OrderItemID id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     private Integer quantity;
     private BigDecimal price;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @MapsId("orderId")
     @JoinColumn(name = "order_id")
     private Order order;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @MapsId("productId")
     @JoinColumn(name = "product_id")
     private Product product;
 }

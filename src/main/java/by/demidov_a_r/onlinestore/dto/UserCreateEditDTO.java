@@ -9,15 +9,13 @@ import jakarta.validation.constraints.Size;
 import lombok.Value;
 import org.springframework.web.multipart.MultipartFile;
 
-@Value
-public class UserCreateEditDTO {
-    @NotBlank
-    @Size(min = 3, max = 30)
-    String username;
-    @NotBlank
-    @Size(min = 3, max = 30)
-    String password;
-    PersonalInfo personalInfo;
-    Role role;
-    MultipartFile image;
-}
+public record UserCreateEditDTO(
+        @NotBlank
+        @Size(min = 3, max = 30)
+        String username,
+        @NotBlank
+        @Size(min = 3, max = 30)
+        String password,
+        PersonalInfo personalInfo,
+        Role role
+) { }

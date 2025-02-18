@@ -15,21 +15,18 @@ public class UserCreateEditMapper implements Mapper<UserCreateEditDTO, User> {
     @Override
     public User mapTo(UserCreateEditDTO object) {
         return User.builder()
-                .username(object.getUsername())
-                .password(object.getPassword())
-                .personalInfo(object.getPersonalInfo())
-                .role(object.getRole())
+                .username(object.username())
+                .password(object.password())
+                .personalInfo(object.personalInfo())
+                .role(object.role())
                 .build();
     }
 
     public User copy(UserCreateEditDTO from, User user) {
-        user.setUsername(from.getUsername());
-        user.setPassword(from.getPassword());
-        user.setPersonalInfo(from.getPersonalInfo());
-        user.setRole(from.getRole());
-
-        Optional.ofNullable(from.getImage()).filter(Predicate.not(MultipartFile::isEmpty))
-                .ifPresent(image -> user.setImage(image.getOriginalFilename()));
+        user.setUsername(from.username());
+        user.setPassword(from.password());
+        user.setPersonalInfo(from.personalInfo());
+        user.setRole(from.role());
 
         return user;
     }

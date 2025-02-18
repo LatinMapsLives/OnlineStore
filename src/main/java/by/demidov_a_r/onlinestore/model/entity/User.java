@@ -23,7 +23,6 @@ public class User {
 
     private String username;
     private String password;
-    private String image;
     @Embedded
     private PersonalInfo personalInfo;
     @Enumerated(EnumType.STRING)

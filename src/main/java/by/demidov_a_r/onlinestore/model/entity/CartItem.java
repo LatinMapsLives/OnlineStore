@@ -15,16 +15,15 @@ import lombok.NoArgsConstructor;
 @Table(name = "cart_items", schema = "public")
 public class CartItem {
 
-    @EmbeddedId
-    private CartItemID id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @MapsId("productId")
     @JoinColumn(name = "product_id")
     private Product product;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @MapsId("cartId")
     @JoinColumn(name = "cart_id")
     private Cart cart;
 
