@@ -10,6 +10,11 @@ spring:
         show_sql: true
         format_sql: true
     open-in-view: false
+  application:
+    name: OnlineStore
 app:
   image:
     path: C:\Java_Projects\OnlineStore\images
+web:
+  frontend:
+    address: http://localhost:3000

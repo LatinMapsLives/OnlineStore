@@ -8,18 +8,12 @@ import by.demidov_a_r.onlinestore.mapper.ProductCreateEditMapper;
 import by.demidov_a_r.onlinestore.mapper.ProductReadMapper;
 import by.demidov_a_r.onlinestore.model.entity.Product;
 import by.demidov_a_r.onlinestore.model.repository.ProductRepository;
-import by.demidov_a_r.onlinestore.model.repository.QPredicates;
-import com.querydsl.core.types.Predicate;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 import java.util.Optional;
-
-import static by.demidov_a_r.onlinestore.model.entity.QProduct.product;
 
 @Service
 @Transactional(readOnly = true)
@@ -30,16 +24,10 @@ public class ProductService {
     private final ProductCreateEditMapper productCreateEditMapper;
     private final ProductReadMapper productReadMapper;
 
-    public Page<Product> findAllByFilter(ProductFilter filter,
+    public Page<ProductReadDTO> findAllByFilter(ProductFilter filter,
                                          Pageable pageable) {
-        Predicate predicate = QPredicates.builder()
-                .add(filter.name(), product.name::containsIgnoreCase)
-                .add(filter.description(), product.description::containsIgnoreCase)
-                .add(filter.category().getId(), product.category.id::eq)
-                .add(filter.bottomPrice(), product.price::goe)
-                .add(filter.topPrice(), product.price::loe)
-                .build();
-        return productRepository.findAll(predicate, pageable);
+        return productRepository.findAllFilter(filter, pageable)
+                .map(productReadMapper::mapTo);
     }
 
     @Transactional
@@ -48,7 +36,20 @@ public class ProductService {
                 .map(productReadMapper::mapTo);
     }
 
+    @Transactional
     public Optional<ProductReadDTO> update(Long id, ProductCreateEditDTO productCreateEditDTO) {
-        return null;
+        return productRepository.findById(id)
+                .map(entity ->
+                        productCreateEditMapper.copy(productCreateEditDTO, entity))
+                .map(productRepository::saveAndFlush)
+                .map(productReadMapper::mapTo);
+    }
+
+    public void delete(Long id){
+        productRepository.deleteById(id);
+    }
+
+    public Optional<ProductReadDTO> findById(Long id){
+        return productRepository.findById(id).map(productReadMapper::mapTo);
     }
 }

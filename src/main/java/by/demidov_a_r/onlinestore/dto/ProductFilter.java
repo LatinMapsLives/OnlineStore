@@ -6,5 +6,5 @@ import java.math.BigDecimal;
 
 public record ProductFilter(String name, String description,
                             BigDecimal bottomPrice, BigDecimal topPrice,
-                            Category category) {
+                            Integer categoryId) {
 }

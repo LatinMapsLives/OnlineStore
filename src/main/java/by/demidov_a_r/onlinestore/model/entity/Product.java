@@ -1,16 +1,15 @@
 package by.demidov_a_r.onlinestore.model.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.math.BigDecimal;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString(exclude = {"category"})
+@EqualsAndHashCode(exclude = {"category"})
 @Builder
 @Entity
 @Table(name = "products", schema = "public")

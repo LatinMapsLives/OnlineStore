@@ -21,4 +21,13 @@ public class ProductCreateEditMapper implements Mapper<ProductCreateEditDTO, Pro
                 .stockQuantity(object.stockQuantity())
                 .build();
     }
+
+    public Product copy(ProductCreateEditDTO object, Product subject) {
+        subject.setName(object.name());
+        subject.setDescription(object.description());
+        subject.setPrice(object.price());
+        subject.setCategory(categoryReadMapper.reverseMap(object.category()));
+        subject.setStockQuantity(object.stockQuantity());
+        return subject;
+    }
 }
