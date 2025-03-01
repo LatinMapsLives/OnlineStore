@@ -7,6 +7,7 @@ import by.demidov_a_r.onlinestore.dto.ProductReadDTO;
 import by.demidov_a_r.onlinestore.mapper.ProductCreateEditMapper;
 import by.demidov_a_r.onlinestore.mapper.ProductReadMapper;
 import by.demidov_a_r.onlinestore.model.entity.Product;
+import by.demidov_a_r.onlinestore.model.entity.User;
 import by.demidov_a_r.onlinestore.model.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -51,5 +52,9 @@ public class ProductService {
 
     public Optional<ProductReadDTO> findById(Long id){
         return productRepository.findById(id).map(productReadMapper::mapTo);
+    }
+
+    public Product dtoToEntity(ProductReadDTO productReadDTO){
+        return productReadMapper.reverseMap(productReadDTO);
     }
 }

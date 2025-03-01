@@ -16,4 +16,15 @@ public class ProductReadMapper implements Mapper<Product, ProductReadDTO> {
         return new ProductReadDTO(object.getId(), object.getName(), object.getDescription(),
                 object.getPrice(), object.getStockQuantity(), categoryReadMapper.mapTo(object.getCategory()));
     }
+
+    public Product reverseMap(ProductReadDTO productReadDTO) {
+        return Product.builder()
+                .id(productReadDTO.getId())
+                .name(productReadDTO.getName())
+                .description(productReadDTO.getDescription())
+                .price(productReadDTO.getPrice())
+                .stockQuantity(productReadDTO.getStockQuantity())
+                .category(categoryReadMapper.reverseMap(productReadDTO.getCategory()))
+                .build();
+    }
 }
