@@ -31,8 +31,8 @@ public class ProductsRestController {
 
     @PostMapping
     public PageResponse<ProductReadDTO> findProductsByFilter(@RequestBody ProductFilter filter,
-                                                             @RequestAttribute Integer pageNumber,
-                                                             @RequestAttribute Integer pageSize) {
+                                                             @RequestParam(name = "pageNumber", defaultValue = "0") Integer pageNumber,
+                                                             @RequestParam(name = "pageSize", defaultValue = "20") Integer pageSize) {
         return PageResponse.of(productService.findAllByFilter(filter, PageRequest.of(pageNumber, pageSize)));
     }
 

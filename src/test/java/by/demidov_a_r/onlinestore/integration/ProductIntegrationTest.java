@@ -12,6 +12,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureWebM
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.TestConstructor;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 
 @RequiredArgsConstructor
@@ -24,9 +25,6 @@ public class ProductIntegrationTest {
     private final ProductsRestController productsRestController;
     private final ProductService productService;
     private final ProductRepository productRepository;
-
-
-    @Test
 
 
 

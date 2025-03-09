@@ -7,6 +7,7 @@ import by.demidov_a_r.onlinestore.dto.ProductFilter;
 import by.demidov_a_r.onlinestore.dto.ProductReadDTO;
 import by.demidov_a_r.onlinestore.service.ProductService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -21,8 +22,10 @@ public class ProductAdminRestController {
     private final ProductService productService;
 
     @GetMapping("/products")
-    public PageResponse<ProductReadDTO> findAllProducts(ProductFilter filter, Pageable pageable) {
-        return PageResponse.of(productService.findAllByFilter(filter, pageable));
+    public PageResponse<ProductReadDTO> findAllProducts(ProductFilter filter,
+                                                        @RequestParam(name = "pageNumber", defaultValue = "0") Integer pageNumber,
+                                                        @RequestParam(name = "pageSize", defaultValue = "20") Integer pageSize) {
+        return PageResponse.of(productService.findAllByFilter(filter, PageRequest.of(pageNumber, pageSize)));
     }
 
     @GetMapping("/products/{id}")

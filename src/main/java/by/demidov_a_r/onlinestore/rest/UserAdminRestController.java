@@ -28,14 +28,14 @@ public class UserAdminRestController {
     }
 
     @GetMapping("/users/{id}")
-    public UserReadDTO findUserById(@PathVariable @RequestBody Long id) {
+    public UserReadDTO findUserById(@PathVariable Long id) {
         return userService.findById(id).orElseThrow(
                 () -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
 
     @PutMapping("/users/{id}")
-    public UserReadDTO updateUser(@PathVariable("id") Long id, @RequestBody @Validated UserCreateEditDTO userCreateEditDTO) {
+    public UserReadDTO updateUser(@PathVariable Long id, @RequestBody @Validated UserCreateEditDTO userCreateEditDTO) {
         return userService.update(id, userCreateEditDTO).orElseThrow(() ->
                 new ResponseStatusException(HttpStatus.BAD_REQUEST));
     }
